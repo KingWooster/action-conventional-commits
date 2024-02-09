@@ -19,7 +19,7 @@ const extractCommits = async (context, core): Promise<Commit[]> => {
 
     const pull_request = get(context, "payload.pull_request");
     if (!pull_request) {
-        core.warnMsg("Push or Pull Request not detected; no commits to check"); 
+        core.warning("Push or Pull Request not detected; no commits to check"); 
     }   else {
         core.info(`detected a "pull request"; using those commits`);
 
@@ -46,11 +46,11 @@ const extractCommits = async (context, core): Promise<Commit[]> => {
                 return [];
             } catch (err) {
                 const msg = (err as any)?.message || err;
-                core.warnMsg(`Issue processing prCommitsUrl: ${msg}; no commits to check`); 
+                core.warning(`Issue processing prCommitsUrl: ${msg}; no commits to check`); 
                 return [];
             }
         } else {
-            core.warnMsg("missing prCommitsUrl; no commits to check"); 
+            core.warning("missing prCommitsUrl; no commits to check"); 
         }
     }
 
