@@ -24,6 +24,11 @@ const isValidCommitMessage = (message: string, availableTypes = DEFAULT_COMMIT_T
     // Commit message doesn't fall into the exceptions group. Let's do the validation.
     let [possiblyValidCommitType] = message.split(":");
     possiblyValidCommitType = possiblyValidCommitType.toLowerCase();
+    const scope = possiblyValidCommitType.match(/\(\S*?\)/);
+
+    if(!scope) {
+        return false;
+    }
 
     // Let's remove scope if present.
     if (possiblyValidCommitType.match(/\(\S*?\)/)) {
