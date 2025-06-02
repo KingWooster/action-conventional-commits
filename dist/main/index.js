@@ -61404,10 +61404,13 @@ const isValidCommitMessage = (message, availableTypes = DEFAULT_COMMIT_TYPES) =>
         return true;
     }
     // Commit message doesn't fall into the exceptions group. Let's do the validation.
-    let [possiblyValidCommitType] = message.split(":");
-    possiblyValidCommitType = possiblyValidCommitType.toLowerCase();
+    let [possiblyValidCommitType, description] = message.split(": ");
     const scope = possiblyValidCommitType.match(/\(\S*?\)/);
     if (!scope) {
+        return false;
+    }
+    // ensure  first letter is lowercase
+    if (description && description[0] === description[0].toUpperCase()) {
         return false;
     }
     // Let's remove scope if present.
