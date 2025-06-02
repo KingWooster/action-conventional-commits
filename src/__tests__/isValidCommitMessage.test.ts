@@ -13,4 +13,6 @@ test("should be able to correctly validate the commit message", () => {
     expect(isValidCommitMessage("🚧 fixing something")).toBe(false);
     expect(isValidCommitMessage("🚧 something: should not work")).toBe(false);
     expect(isValidCommitMessage("chorz: 123")).toBe(false);
+    expect(isValidCommitMessage("chore(ticket):no space")).toBe(false);
+    expect(isValidCommitMessage("chore(ticket): Captial letter commit")).toBe(false);
 });
